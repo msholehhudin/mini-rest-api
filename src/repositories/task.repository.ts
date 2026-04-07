@@ -1,5 +1,5 @@
 import prisma from '../config/prisma'
-import { Prisma, Task } from '@prisma/client'
+import { Prisma, Status, Task } from '@prisma/client'
 
 export class TaskRepository {
   async create(data: Prisma.TaskCreateInput): Promise<Task> {
@@ -15,6 +15,12 @@ export class TaskRepository {
   async findById(id: string): Promise<Task | null> {
     return prisma.task.findUnique({
       where: { id },
+    })
+  }
+
+  async findByStatus(status: Status){
+    return prisma.task.findMany({
+      where: {status}
     })
   }
 

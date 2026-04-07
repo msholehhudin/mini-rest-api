@@ -1,5 +1,5 @@
 import { TaskRepository } from '../repositories/task.repository'
-import { Prisma, Task } from '@prisma/client'
+import { Prisma, Status, Task } from '@prisma/client'
 
 export class TaskService {
   private taskRepository: TaskRepository
@@ -18,8 +18,10 @@ export class TaskService {
     return this.taskRepository.create(data)
   }
 
-  async getAllTasks(): Promise<Task[]> {
-
+  async getAllTasks(status: Status): Promise<Task[]> {
+    if(status){
+        return this.taskRepository.findByStatus(status)
+    }
     return this.taskRepository.findAll()
   }
 
