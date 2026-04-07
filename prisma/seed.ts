@@ -1,12 +1,15 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Status } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 async function main() {
+
+  await prisma.task.deleteMany()
+
   await prisma.task.createMany({
     data: [
-      { title: 'Task 1', status: 'TODO' },
-      { title: 'Task 2', status: 'IN_PROGRESS' }
+      { title: 'Learn Prisma', description: 'Understand CRM Basic', status: Status.TODO },
+      { title: 'Build API', description: 'Create REST endpoints', status: Status.IN_PROGRESS }
     ]
   })
 }
