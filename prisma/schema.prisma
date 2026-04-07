@@ -11,3 +11,20 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum Status {
+ TODO
+ IN_PROGRESS
+ DONE
+}
+
+model Task {
+  id            String @id @default(uuid())
+  title         String
+  description   String?
+  status        Status @default(TODO)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([status])
+}
