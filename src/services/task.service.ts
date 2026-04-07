@@ -18,7 +18,7 @@ export class TaskService {
     return this.taskRepository.create(data)
   }
 
-  async getAllTasks(status: Status): Promise<Task[]> {
+  async getAllTasks(status?: Status): Promise<Task[]> {
     if(status){
         return this.taskRepository.findByStatus(status)
     }
